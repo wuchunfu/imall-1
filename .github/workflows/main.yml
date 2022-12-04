@@ -14,19 +14,21 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '14.15.0'
+      
     - name: INSTALL
+      working-directory: ./web/
       run: npm install
     - name: BUILD
+      working-directory: ./web/
       run: npm run build
-      working-directory: ./web
     - name: DEPOLY
       uses: easingthemes/ssh-deploy@v3.0.1
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SOURCE: "dist/* "
+          SOURCE: "./web/dist/* "
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: "ubuntu"
           TARGET: "/usr/local/nginx/html/"
           EXCLUDE: 
-            cd /usr/local/nginx/sbin
+            sudo cd /usr/local/nginx/sbin
             sudo ./nginx -s reload
