@@ -22,12 +22,10 @@ jobs:
       working-directory: ./web/
       run: npm run build
     - name: DEPOLY
-      uses: easingthemes/ssh-deploy@v3.0.1
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SOURCE: "web/dist"
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: "ubuntu"
-        TARGET: "/home/ubuntu/"
-        EXCLUDE:
-          sudo mv /home/ubuntu/dist /usr/local/nginx/html/
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        HOST: ${{ secrets.REMOTE_HOST }}
+      run: |
+        mkdir -p ~/.ssh/ && echo "$KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        scp -r web/dist ubuntu@$HOST:/home/ubuntu/
