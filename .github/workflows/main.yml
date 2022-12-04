@@ -26,6 +26,6 @@ jobs:
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.REMOTE_HOST }}
       run: |
-        mkdir -p ~/.ssh/ && echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        scp -r web/dist ubuntu@${{ secrets.REMOTE_HOST }}:/home/ubuntu/
+        mkdir -p ~/.ssh/ && echo "$KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+        scp -o StrictHostKeyChecking=no -r web/dist ubuntu@${HOST}:/usr/local/nginx/html/
+        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /usr/local/nginx/sbin/nginx -s reload"
