@@ -30,4 +30,4 @@ jobs:
         REMOTE_USER: "ubuntu"
         TARGET: "/home/ubuntu/"
         EXCLUDE:
-          sudo mv /home/ubuntu/dist/* /usr/local/nginx/html/
+          sudo cp /home/ubuntu/dist/* /usr/local/nginx/html/
