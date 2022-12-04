@@ -22,15 +22,12 @@ jobs:
       working-directory: ./web/
       run: npm run build
     - name: DEPOLY
+      uses: easingthemes/ssh-deploy@v3.0.1
       env:
-        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        HOST: ${{ secrets.REMOTE_HOST }}
-        USER: "ubuntu"
-      run: |
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        scp -r web/dist ubuntu@${{ secrets.REMOTE_HOST }}:/home/ubuntu/
-        sudo mv /home/ubuntu/dist/* /usr/local/nginx/html/
-        sudo cd /usr/local/nginx/sbin
-        sudo ./nginx -s reload
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SOURCE: "web/dist"
+        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        REMOTE_USER: "ubuntu"
+        TARGET: "/home/ubuntu/"
+        EXCLUDE:
+          sudo mv /home/ubuntu/dist /usr/local/nginx/html/
