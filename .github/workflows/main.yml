@@ -28,5 +28,4 @@ jobs:
       run: |
         mkdir -p ~/.ssh/ && echo "$KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
-        scp -r web/dist ubuntu@${HOST}:/home/ubuntu/
-        echo $HOST
+        scp -o StrictHostKeyChecking=no -r web/dist ubuntu@${HOST}:/home/ubuntu/
