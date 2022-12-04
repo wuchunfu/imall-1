@@ -30,4 +30,4 @@ jobs:
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         scp -o StrictHostKeyChecking=no -r web/dist ubuntu@${HOST}:/home/ubuntu/
         ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo rm -f /usr/local/nginx/html/dist
-        && sudo mv /home/ubuntu/dist /usr/local/nginx/html/ && sudo /usr/local/nginx/sbin/nginx -s reload
+        && sudo mv /home/ubuntu/dist /usr/local/nginx/html/ && sudo /usr/local/nginx/sbin/nginx -s reload"
