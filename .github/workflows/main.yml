@@ -19,6 +19,7 @@ jobs:
       working-directory: ./web/
       run: npm install
     - name: BUILD
+      working-directory: ./web/
       run: npm run build
     - name: DEPOLY
       uses: easingthemes/ssh-deploy@v3.0.1
