@@ -34,6 +34,6 @@ jobs:
       run: |
         mkdir -p ~/.ssh/ && echo "$KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
         scp -o StrictHostKeyChecking=no -r web/dist ubuntu@${HOST}:/usr/local/nginx/html/
-        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /usr/local/nginx/sbin/nginx -s reload && sudo pkill mallserver"
+        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /usr/local/nginx/sbin/nginx -s reload;sudo pkill mallserver"
         scp -o StrictHostKeyChecking=no -r server/mallserver ubuntu@${HOST}:/home/ubuntu/mallapi/
         ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /home/ubuntu/mallapi/mallserver"
