@@ -36,4 +36,4 @@ jobs:
         scp -o StrictHostKeyChecking=no -r web/dist ubuntu@${HOST}:/usr/local/nginx/html/
         ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /usr/local/nginx/sbin/nginx -s reload"
         scp -o StrictHostKeyChecking=no -r server/mallserver ubuntu@${HOST}:/home/ubuntu/mallapi/
-        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo nohup /home/ubuntu/mallapi/mallserver &"
+        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo nohup /home/ubuntu/mallapi/mallserver &; exit"
