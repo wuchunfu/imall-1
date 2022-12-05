@@ -27,13 +27,13 @@ jobs:
     - name: Build Server
       run: cd server && go mod tidy && go build -o mallserver main.go
     
-    - name: DepOLY MALL
+    - name: Deploy MALL
       env:
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.REMOTE_HOST }}
       run: |
         mkdir -p ~/.ssh/ && echo "$KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
         scp -o StrictHostKeyChecking=no -r web/dist ubuntu@${HOST}:/usr/local/nginx/html/
-        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /usr/local/nginx/sbin/nginx -s reload ; sudo pkill mallserver"
+        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /usr/local/nginx/sbin/nginx -s reload"
         scp -o StrictHostKeyChecking=no -r server/mallserver ubuntu@${HOST}:/home/ubuntu/mallapi/
-        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /home/ubuntu/mallapi/mallserver"
+        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /home/ubuntu/mallapi/restart.sh"
