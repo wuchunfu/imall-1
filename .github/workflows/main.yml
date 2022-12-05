@@ -37,4 +37,4 @@ jobs:
         ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /usr/local/nginx/sbin/nginx -s reload"
         ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo pkill mallserver"
         scp -o StrictHostKeyChecking=no -r server/mallserver ubuntu@${HOST}:/home/ubuntu/mallapi/
-        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /home/ubuntu/mallapi/restar.sh"
+        ssh -o StrictHostKeyChecking=no ubuntu@${HOST} "sudo /home/ubuntu/mallapi/restart.sh"
