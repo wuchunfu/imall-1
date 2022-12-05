@@ -27,7 +27,7 @@ jobs:
     - name: Build Server
       run: cd server && go mod tidy && go build -o mallserver main.go
     
-    - name: DePOLY MALL
+    - name: DepOLY MALL
       env:
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.REMOTE_HOST }}
