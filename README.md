@@ -1,3 +1,13 @@
+### 新项目（客户关系管理系统）
+
+客户关系管理系统，基于 Vue + Go 实现，主要功能有仪表盘、客户管理、合同管理、产品管理，订阅等功能。
+
+- 项目地址：[github.com/zchengo/crm](https://github.com/zchengo/crm)
+
+- 在线演示：[zocrm.cloud](https://zocrm.cloud)
+
+- 项目文档：[docs.zocrm.cloud](https://docs.zocrm.cloud)
+
 # mall
 
 ### 简介
